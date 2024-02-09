@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <title>To Do</title>
+        <meta name="viewport" content="width:device-width, initial-scale=1.0">
+        <style>
+            body{
+            }
+            .parent{
+                display:flex;
+                height:100%;
+                width:100%;
+            }
+            .content{
+                padding:2px;
+                width:60%;
+                height:100%;
+            }
+            .list{
+                border:2px solid white;
+                padding:2px;
+                width:40%;
+                height:100%;
+                overflow:auto;
+            }
+            .title{
+                width:100%;
+                height:10%;
+            }
+            .notes{
+                width:100%;
+                height:83%;
+            }
+            .submit-btn{
+                height:7%;
+                width:40%;
+            }
+            .notes, .title, .submit-btn{
+                background-color: #272727;
+                box-shadow: 2% 0 0 #282828, 0 4% 0 #282828, 0 0 8% #282828 ;
+                color:white;
+                border-radius: 10px;
+                text-align: center;
+                margin:2px 0;
+                padding:5px;
+            }
+            @media (max-width: 768px) {
+                .parent{
+                    display:flex;
+                    flex-direction: column;
+                }
+                .content{
+                    width:100%;
+                    padding:2px;
+                }
+                .list{
+                    margin:15px 0;
+                    height:50%;
+                    width:100%;
+                }
+            }
+            caption{
+                font-weight: bold;
+                font-size: 24px;
+                text-align: center;
+                color:#333;
+                margin-bottom:16px;
+            }
+            thead{
+                background-color: #333;
+                color:white;
+                font-size:0.875rem;
+                text-transform: uppercase;
+            }
+            table{
+                border-collapse: collapse;
+                border:1px solid black;
+                text-align: center;
+                width:100%;
+                /* vertical-align: middle; */
+            }
+            thead th
+            th, td{
+                /* border:1px solid black;*/
+                padding:10px;
+            }
+            tr th:nth-child(1){
+                width:10%;
+            }
+            tr th:nth-child(2){
+                width:20%;
+            }
+            tr th:nth-child(3){
+                width:70%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent">
+            <div class="content">
+            <form action="/submit" method="post">
+                <input type="text" placeholder="Title" class="title" name="title">
+                <input type="text" placeholder="Description" class="notes" name="descp">
+                <input type="submit" class="submit-btn">
+            </form>
+            </div>
+            <div class="list">
+                <table>
+                    <caption>Your Saved ToDo List</caption>
+                    <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todos %}
+                    <tr>
+                        <td>{{todo.sno}}</td>
+                        <td>{{todo.date}}</td>
+                        <td>{{todo.descp}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
